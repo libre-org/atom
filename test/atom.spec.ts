@@ -5,23 +5,20 @@ describe("Atom instance", () => {
     expect(Atom.of(1)).toBeInstanceOf(Atom);
   });
 
-  it("has a public instance member $$id which is a number that acts as its unique ID", () => {
-    const id = Atom.of(1)["$$id"];
+  it("has a readonly public instance member $$id which is a number that acts as its unique ID", () => {
+    const a = Atom.of(1);
+    const id = a["$$id"];
     expect(typeof id).toBe("number");
-  });
 
-  it("cannot be modified directly", () => {
-    const TEST_ATOM = Atom.of(1);
+    expect(() => {
+      (a as any)["$$id"] = 1000e10;
+    }).toThrow(TypeError);
 
-    const illegalWrite = () => {
-      (TEST_ATOM as any).someProp = "someVal";
-    };
-
-    expect(illegalWrite).toThrow(new TypeError("Cannot add property someProp, object is not extensible"));
+    expect(a["$$id"]).toBe(id);
   });
 
   it("implements toString and inspect", () => {
-    const a = Atom.of(1);
+    const a = Atom.of({ a: "hi" });
     expect(typeof a.toString()).toBe("string");
     expect(typeof a.inspect()).toBe("string");
   });

@@ -1,15 +1,16 @@
 import * as ErrorMsgs from "./error-messages";
+import { DeepImmutable } from "./internal-types";
 // ------------------------------------------------------------------------------------------ //
 // ---------------------------------- INTERNAL STATE ---------------------------------------- //
 // ------------------------------------------------------------------------------------------ //
 
 let nextAtomUid = 0;
 
-const stateByAtomId: Record<number, unknown> = Object.create(null);
+const stateByAtomId: Record<number, DeepImmutable<any>> = Object.create(null);
 
 /** @ignore */
-export function getState<S>(atom: Atom<S>): S {
-  return stateByAtomId[atom["$$id"]] as S;
+export function getState<S>(atom: Atom<S>): DeepImmutable<S> {
+  return stateByAtomId[atom["$$id"]];
 }
 
 // ------------------------------------------------------------------------------------------ //
@@ -18,10 +19,10 @@ export function getState<S>(atom: Atom<S>): S {
 
 /**
  * `@libre/atom` provides a data type called `Atom` and a few functions for working with `Atom`s.
- * It is heavily inspired by `atom`s in Clojure.
+ * It is heavily inspired by `atom`s in Clojure(Script).
  *
  * Atoms provide a predictable way to manage state that is shared by multiple components of a
- * program as it changes over time. They are particularly useful in the functional and reactive
+ * program as that state changes over time. They are particularly useful in the functional and reactive
  * programming paradigms, where most components of a program are pure functions operating on
  * immutable data. In this context, Atoms provide a form of mutability that is controlled in such
  * a way that no component can mutate another component's current reference to the state in
@@ -33,7 +34,7 @@ export function getState<S>(atom: Atom<S>): S {
 // ======================================= ATOM ==============================================
 //
 
-export class Atom<S = unknown> {
+export class Atom<S = any> {
   /**
    * Constructs a new instance of [[Atom]] with its internal state
    * set to `state`.
@@ -49,7 +50,7 @@ const a2 = Atom.of("zero")
 const a3 = Atom.of({ count: 0 })
 ```
    */
-  public static of<S>(state: S) {
+  public static of<S>(state: S): Atom<S> {
     return new Atom(state);
   }
 
@@ -58,9 +59,9 @@ const a3 = Atom.of({ count: 0 })
 
   /** @ignore */
   private constructor(state: S) {
-    this["$$id"] = nextAtomUid++;
+    Object.defineProperty(this, "$$id", { value: nextAtomUid++ });
     stateByAtomId[this["$$id"]] = state;
-    Object.freeze(this);
+    return this;
   }
   /** @ignore */
   public toString(): string {
@@ -83,9 +84,10 @@ const a3 = Atom.of({ count: 0 })
 //
 
 /**
- * Reads the current state of an [[Atom]]
+ * Reads (i.e. "*dereferences*") the current state of an [[Atom]]. The dereferenced value
+ * should ___not___ be mutated.
  *
- * @param S the internal state of the [[Atom]] passed to [[deref]]
+ * @param <S> the type of `atom`'s inner state
  *
  * @example
 ```js
@@ -97,7 +99,7 @@ const stateAtom = Atom.of({ count: 0 })
 deref(stateAtom) // => { count: 0 }
 ```
  */
-export function deref<S>(atom: Atom<S>) {
+export function deref<S>(atom: Atom<S>): DeepImmutable<S> {
   if (!(atom instanceof Atom)) {
     const arg = JSON.stringify(atom, null, "  ");
     throw TypeError(`${ErrorMsgs.derefArgMustBeAtom}\n${arg}`);
@@ -111,7 +113,7 @@ export function deref<S>(atom: Atom<S>) {
 //
 /**
  * Swaps `atom`'s state with the value returned from applying `updateFn` to `atom`'s
- * current state.
+ * current state. `updateFn` should be a pure function and ___not___ mutate `state`.
  *
  * @param atom an instance of [[Atom]]
  * @param updateFn a pure function that takes the current state and returns the next state; the next state should be of the same type/interface as the current state;
@@ -127,7 +129,7 @@ export function deref<S>(atom: Atom<S>) {
  *}));
  * ```
  */
-export function swap<S>(atom: Atom<S>, updateFn: (state: S) => S): void {
+export function swap<S>(atom: Atom<S>, updateFn: (state: DeepImmutable<S>) => S): void {
   stateByAtomId[atom["$$id"]] = updateFn(getState(atom));
 }
 
@@ -147,6 +149,7 @@ export function swap<S>(atom: Atom<S>, updateFn: (state: S) => S): void {
 ```js
 
 import {Atom, useAtom, set} from '@libre/atom'
+import { DeepImmutable } from './internal-types';
 
 const atom = Atom.of({ count: 0 })
 
