@@ -19,4 +19,10 @@ describe("Atom instance", () => {
 
     expect(illegalWrite).toThrow(new TypeError("Cannot add property someProp, object is not extensible"));
   });
+
+  it("implements toString and inspect", () => {
+    const a = Atom.of(1);
+    expect(typeof a.toString()).toBe("string");
+    expect(typeof a.inspect()).toBe("string");
+  });
 });
