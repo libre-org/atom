@@ -12,6 +12,19 @@
 
 <h3 align="center">Inspired by <a href="https://clojure.org/reference/atoms">atom</a>s in <a href="https://clojure.org/index">Clojure(Script)</a></h3>
 
+[![TypeScript](https://badges.frapsoft.com/typescript/version/typescript-next.svg?v=101)](https://github.com/ellerbrock/typescript-badges/)
+[![npm (scoped)](https://img.shields.io/npm/v/@libre/atom.svg)](https://www.npmjs.com/package/@libre/atom)
+[![npm bundle size (minified)](https://img.shields.io/bundlephobia/min/@libre/atom.svg)](https://bundlephobia.com/result?p=@libre/atom)
+[![npm bundle size (minified + gzip)](https://img.shields.io/bundlephobia/minzip/@libre/atom.svg)](https://bundlephobia.com/result?p=@libre/atom)
+
+[![Build Status](https://travis-ci.com/libre-org/atom.svg?branch=master)](https://travis-ci.com/libre-org/atom)
+[![codecov](https://codecov.io/gh/libre-org/atom/branch/master/graph/badge.svg)](https://codecov.io/gh/libre-org/atom)
+[![npm](https://img.shields.io/npm/dt/@libre/atom.svg)](https://www.npmjs.com/package/@libre/atom)
+
+[![NpmLicense](https://img.shields.io/npm/l/@libre/atom.svg)](https://www.npmjs.com/package/@libre/atom)
+[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
+[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
+
 ## Description
 
 ### Put your state in an `Atom`:
