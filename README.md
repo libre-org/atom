@@ -61,3 +61,21 @@ const setColor = color =>
 ```
 
 Take notice that our `updateFn` is [spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax)ing the old state onto a new object before overriding `color`. This is an easy way to obey the rules of `updateFn`.
+
+## Installation
+
+`react-atom` has zero `dependencies`!
+
+```
+npm i -S @libre/atom
+```
+
+## Documentation
+
+[You can find API docs for `@libre/atom` here](https://libre-org.github.io/atom/)
+
+## Contributing / Feedback
+
+Please open an issue if you have any questions, suggestions for
+improvements/features, or want to submit a PR for a bug-fix (please include
+tests if applicable).
