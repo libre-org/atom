@@ -1,0 +1,22 @@
+language: node_js
+notifications:
+  email: false
+node_js:
+  - "10"
+install:
+  - npm ci
+script:
+  - npm run lint
+  - npm run test:withCoverage
+before_deploy:
+  - npm run build
+deploy:
+  provider: script
+  skip_cleanup: true
+  script:
+    - npx semantic-release
+after_success:
+  - npx codecov
+branches:
+  except:
+    - /^v\d+\.\d+\.\d+$/
