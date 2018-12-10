@@ -77,3 +77,6 @@ typings/
 
 # published transpiled code
 dist
+
+# rollup cache
+.rpt2_cache
