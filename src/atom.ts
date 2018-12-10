@@ -68,7 +68,7 @@ const a3 = Atom.of({ count: 0 })
     return `Atom ${JSON.stringify(
       {
         $$id: this["$$id"],
-        "[[inner_state]]": getState(this)
+        "[[__state__]]": getState(this)
       },
       null,
       "  "
