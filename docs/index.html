@@ -71,6 +71,7 @@
 				</div>
 				<h3 align="center">A way to manage shared, synchronous, independent state</h3>
 				<h3 align="center">Inspired by <a href="https://clojure.org/reference/atoms">atom</a>s in <a href="https://clojure.org/index">Clojure(Script)</a></h3>
+				<div style="heigth:40px;">&nbsp;</div>
 				<p><a href="https://github.com/ellerbrock/typescript-badges/"><img src="https://badges.frapsoft.com/typescript/version/typescript-next.svg?v=101" alt="TypeScript"></a>
 					<a href="https://www.npmjs.com/package/@libre/atom"><img src="https://img.shields.io/npm/v/@libre/atom.svg" alt="npm (scoped)"></a>
 					<a href="https://bundlephobia.com/result?p=@libre/atom"><img src="https://img.shields.io/bundlephobia/min/@libre/atom.svg" alt="npm bundle size (minified)"></a>
@@ -82,6 +83,9 @@
 					<a href="http://commitizen.github.io/cz-cli/"><img src="https://img.shields.io/badge/commitizen-friendly-brightgreen.svg" alt="Commitizen friendly"></a>
 				<a href="https://github.com/semantic-release/semantic-release"><img src="https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg" alt="semantic-release"></a></p>
 				<h2 id="description">Description</h2>
+				<p><code>@libre/atom</code> provides a data type called <code>Atom</code>s and a few functions for working with <code>Atom</code>s. It is heavily inspired by <code>atom</code>s in Clojure(Script). While the full power of Clojure <code>atom</code>s cannot be experienced in JavaScript&#39;s single-threaded runtime, <code>Atom</code>s do still offer similar benefits due to the highly asynchronous and event-driven nature of JavaScript.</p>
+				<p>Atoms provide a predictable way to manage state shared by multiple components of a
+				program as that state changes over time. They are particularly useful in the functional and reactive programming paradigms, where most components of a program are pure functions operating on immutable data. <code>Atoms</code> provide a controlled mechanism for mutability that lets multiple components access and update the same value without risking mutating another component&#39;s reference to it in the middle of some process or asynchronous operation.</p>
 				<h3 id="put-your-state-in-an-atom-">Put your state in an <code>Atom</code>:</h3>
 				<pre><code class="language-ts"><span class="hljs-keyword">import</span> { Atom } <span class="hljs-keyword">from</span> <span class="hljs-string">"@libre/atom"</span>;
 
@@ -96,7 +100,10 @@
 <span class="hljs-keyword">const</span> { color } = deref(appState);</code></pre>
 				<h3 id="update-state-with-swap">Update state with <code>swap</code></h3>
 				<p>You can&#39;t modify an <code>Atom</code> directly. The main way to update state is with <code>swap</code>. Here&#39;s its call signature:</p>
-				<pre><code class="language-ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">swap</span>&lt;<span class="hljs-title">S</span>&gt;(<span class="hljs-params">atom: Atom&lt;S&gt;, updateFn: (state: S) =&gt; S</span>): <span class="hljs-title">void</span></span>;</code></pre>
+				<pre><code class="language-ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">swap</span>&lt;<span class="hljs-title">S</span>&gt;(<span class="hljs-params">
+  atom: Atom&lt;S&gt;, 
+  updateFn: (state: DeepImmutable&lt;S&gt;) =&gt; S
+</span>): <span class="hljs-title">void</span></span>;</code></pre>
 				<p><code>updateFn</code> is applied to <code>atom</code>&#39;s state and the return value is set as <code>atom</code>&#39;s new state. There are just two simple rules for <code>updateFn</code>:</p>
 				<ol>
 					<li>it must return a value of the same type/interface as the previous state</li>
@@ -110,10 +117,24 @@
     ...state,
     <span class="hljs-attr">color</span>: color
   }));</code></pre>
-				<p>Take notice that our <code>updateFn</code> is <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax">spread</a>ing the old state onto a new object before overriding <code>color</code>. This is an easy way to obey the rules of <code>updateFn</code>.</p>
+				<blockquote>
+					<p><strong>Note:</strong> Our <code>updateFn</code> is <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax">spread</a>ing the old state onto a new object before overriding <code>color</code>. This is an easy way to obey the rules of <code>updateFn</code>. If manually spreading values seems tedious, there are many libraries that offer convenient functions for operating on JS data structures in an immutable manner, e.g. see <a href="https://ramdajs.com/">ramda</a>, <a href="https://sanctuary.js.org/">sanctuary</a>, <a href="https://evilsoft.github.io/crocks/docs/">crocks</a>, or (for the wizards among us) <a href="https://gcanti.github.io/fp-ts/">fp-ts</a>.</p>
+				</blockquote>
 				<h2 id="installation">Installation</h2>
-				<p><code>react-atom</code> has zero <code>dependencies</code>!</p>
-				<pre><code><span class="hljs-built_in">npm</span> i -S @libre/atom</code></pre><h2 id="documentation">Documentation</h2>
+				<p><strong>NPM</strong>: <code>npm install --save @libre/atom</code></p>
+				<p><strong>Yarn</strong>: <code>yarn add @libre/atom</code></p>
+				<p><strong>CDN</strong>: <code>&lt;script src=&quot;https://unpkg.com/@libre/atom&quot; /&gt;</code></p>
+				<ul>
+					<li>Exposed on the global object, like so: <code>window[&quot;@libre/atom&quot;]</code></li>
+				</ul>
+				<h2 id="usage">Usage</h2>
+				<p><strong>ES6 <code>import</code></strong></p>
+				<pre><code class="language-js"><span class="hljs-keyword">import</span> { Atom, deref, set, swap } <span class="hljs-keyword">from</span> <span class="hljs-string">"@libre/atom"</span>;</code></pre>
+				<p><strong>CommonJS <code>require</code></strong></p>
+				<pre><code class="language-js"><span class="hljs-keyword">const</span> { Atom, deref, set, swap } = <span class="hljs-built_in">require</span>(<span class="hljs-string">"@libre/atom"</span>);</code></pre>
+				<p><strong>Web <code>&lt;script /&gt;</code> tag</strong></p>
+				<pre><code class="language-js"><span class="hljs-keyword">const</span> { Atom, deref, set, swap } = <span class="hljs-built_in">window</span>[<span class="hljs-string">"@libre/atom"</span>];</code></pre>
+				<h2 id="documentation">Documentation</h2>
 				<p><a href="https://libre-org.github.io/atom/">You can find API docs for <code>@libre/atom</code> here</a></p>
 				<h2 id="contributing-feedback">Contributing / Feedback</h2>
 				<p>Please open an issue if you have any questions, suggestions for
@@ -136,6 +157,9 @@
 					</li>
 					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
 						<a href="globals.html#atomstate" class="tsd-kind-icon">Atom<wbr>State</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
+						<a href="globals.html#deepimmutable" class="tsd-kind-icon">Deep<wbr>Immutable</a>
 					</li>
 					<li class=" tsd-kind-function tsd-has-type-parameter">
 						<a href="globals.html#deref" class="tsd-kind-icon">deref</a>

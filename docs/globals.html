@@ -73,6 +73,7 @@
 							<h3>Type aliases</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-type-alias tsd-has-type-parameter"><a href="globals.html#atomstate" class="tsd-kind-icon">Atom<wbr>State</a></li>
+								<li class="tsd-kind-type-alias tsd-has-type-parameter"><a href="globals.html#deepimmutable" class="tsd-kind-icon">Deep<wbr>Immutable</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
@@ -94,7 +95,7 @@
 					<div class="tsd-signature tsd-kind-icon">Atom<wbr>State<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">AtomState&lt;A&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/libre-org/atom/blob/f71c81d/src/internal-types.ts#L16">internal-types.ts:16</a></li>
+							<li>Defined in internal-types.ts:16</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -111,6 +112,21 @@ swap(state, increment);</code></pre>
 						</dl>
 					</div>
 				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-has-type-parameter">
+					<a name="deepimmutable" class="tsd-anchor"></a>
+					<h3>Deep<wbr>Immutable</h3>
+					<div class="tsd-signature tsd-kind-icon">Deep<wbr>Immutable<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">DeepImmutable&lt;T&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in internal-types.ts:33</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>A value or data structure which cannot be mutated</p>
+						</div>
+					</div>
+				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Functions</h2>
@@ -118,13 +134,13 @@ swap(state, increment);</code></pre>
 					<a name="deref" class="tsd-anchor"></a>
 					<h3>deref</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-has-type-parameter">
-						<li class="tsd-signature tsd-kind-icon">deref&lt;S&gt;<span class="tsd-signature-symbol">(</span>atom<span class="tsd-signature-symbol">: </span><a href="classes/atom.html" class="tsd-signature-type">Atom</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">S</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">DeepImmutable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">S</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">deref&lt;S&gt;<span class="tsd-signature-symbol">(</span>atom<span class="tsd-signature-symbol">: </span><a href="classes/atom.html" class="tsd-signature-type">Atom</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">S</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="globals.html#deepimmutable" class="tsd-signature-type">DeepImmutable</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">S</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/libre-org/atom/blob/f71c81d/src/atom.ts#L102">atom.ts:102</a></li>
+									<li>Defined in atom.ts:102</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -158,7 +174,7 @@ deref(stateAtom) <span class="hljs-comment">// =&gt; { count: 0 }</span></code><
 									<h5>atom: <a href="classes/atom.html" class="tsd-signature-type">Atom</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">S</span><span class="tsd-signature-symbol">&gt;</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">DeepImmutable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">S</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <a href="globals.html#deepimmutable" class="tsd-signature-type">DeepImmutable</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">S</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -172,7 +188,7 @@ deref(stateAtom) <span class="hljs-comment">// =&gt; { count: 0 }</span></code><
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/libre-org/atom/blob/f71c81d/src/atom.ts#L161">atom.ts:161</a></li>
+									<li>Defined in atom.ts:161</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -228,7 +244,7 @@ deref(atom) <span class="hljs-comment">// =&gt; { count: 100 }</span></code></pr
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/libre-org/atom/blob/f71c81d/src/atom.ts#L132">atom.ts:132</a></li>
+									<li>Defined in atom.ts:132</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -270,14 +286,14 @@ deref(atom) <span class="hljs-comment">// =&gt; { count: 100 }</span></code></pr
 									<ul class="tsd-parameters">
 										<li class="tsd-parameter-siganture">
 											<ul class="tsd-signatures tsd-kind-type-literal tsd-is-not-exported">
-												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>state<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">DeepImmutable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">S</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">S</span></li>
+												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>state<span class="tsd-signature-symbol">: </span><a href="globals.html#deepimmutable" class="tsd-signature-type">DeepImmutable</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">S</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">S</span></li>
 											</ul>
 											<ul class="tsd-descriptions">
 												<li class="tsd-description">
 													<h4 class="tsd-parameters-title">Parameters</h4>
 													<ul class="tsd-parameters">
 														<li>
-															<h5>state: <span class="tsd-signature-type">DeepImmutable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">S</span><span class="tsd-signature-symbol">&gt;</span></h5>
+															<h5>state: <a href="globals.html#deepimmutable" class="tsd-signature-type">DeepImmutable</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">S</span><span class="tsd-signature-symbol">&gt;</span></h5>
 														</li>
 													</ul>
 													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">S</span></h4>
@@ -308,6 +324,9 @@ deref(atom) <span class="hljs-comment">// =&gt; { count: 100 }</span></code></pr
 					</li>
 					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
 						<a href="globals.html#atomstate" class="tsd-kind-icon">Atom<wbr>State</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
+						<a href="globals.html#deepimmutable" class="tsd-kind-icon">Deep<wbr>Immutable</a>
 					</li>
 					<li class=" tsd-kind-function tsd-has-type-parameter">
 						<a href="globals.html#deref" class="tsd-kind-icon">deref</a>

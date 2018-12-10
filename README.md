@@ -12,6 +12,8 @@
 
 <h3 align="center">Inspired by <a href="https://clojure.org/reference/atoms">atom</a>s in <a href="https://clojure.org/index">Clojure(Script)</a></h3>
 
+<div style="heigth:40px;">&nbsp;</div>
+
 [![TypeScript](https://badges.frapsoft.com/typescript/version/typescript-next.svg?v=101)](https://github.com/ellerbrock/typescript-badges/)
 [![npm (scoped)](https://img.shields.io/npm/v/@libre/atom.svg)](https://www.npmjs.com/package/@libre/atom)
 [![npm bundle size (minified)](https://img.shields.io/bundlephobia/min/@libre/atom.svg)](https://bundlephobia.com/result?p=@libre/atom)
@@ -26,6 +28,11 @@
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 
 ## Description
+
+`@libre/atom` provides a data type called `Atom`s and a few functions for working with `Atom`s. It is heavily inspired by `atom`s in Clojure(Script). While the full power of Clojure `atom`s cannot be experienced in JavaScript's single-threaded runtime, `Atom`s do still offer similar benefits due to the highly asynchronous and event-driven nature of JavaScript.
+
+Atoms provide a predictable way to manage state shared by multiple components of a
+program as that state changes over time. They are particularly useful in the functional and reactive programming paradigms, where most components of a program are pure functions operating on immutable data. `Atoms` provide a controlled mechanism for mutability that lets multiple components access and update the same value without risking mutating another component's reference to it in the middle of some process or asynchronous operation.
 
 ### Put your state in an `Atom`:
 
@@ -53,7 +60,10 @@ const { color } = deref(appState);
 You can't modify an `Atom` directly. The main way to update state is with `swap`. Here's its call signature:
 
 ```ts
-function swap<S>(atom: Atom<S>, updateFn: (state: S) => S): void;
+function swap<S>(
+  atom: Atom<S>, 
+  updateFn: (state: DeepImmutable<S>) => S
+): void;
 ```
 
 `updateFn` is applied to `atom`'s state and the return value is set as `atom`'s new state. There are just two simple rules for `updateFn`:
@@ -73,14 +83,36 @@ const setColor = color =>
   }));
 ```
 
-Take notice that our `updateFn` is [spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax)ing the old state onto a new object before overriding `color`. This is an easy way to obey the rules of `updateFn`.
+> **Note:** Our `updateFn` is [spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax)ing the old state onto a new object before overriding `color`. This is an easy way to obey the rules of `updateFn`. If manually spreading values seems tedious, there are many libraries that offer convenient functions for operating on JS data structures in an immutable manner, e.g. see [ramda](https://ramdajs.com/), [sanctuary](https://sanctuary.js.org/), [crocks](https://evilsoft.github.io/crocks/docs/), or (for the wizards among us) [fp-ts](https://gcanti.github.io/fp-ts/).
 
 ## Installation
 
-`react-atom` has zero `dependencies`!
+**NPM**: `npm install --save @libre/atom`
 
+**Yarn**: `yarn add @libre/atom`
+
+**CDN**: `<script src="https://unpkg.com/@libre/atom" />`
+
+- Exposed on the global object, like so: `window["@libre/atom"]`
+
+## Usage
+
+**ES6 `import`**
+
+```js
+import { Atom, deref, set, swap } from "@libre/atom";
 ```
-npm i -S @libre/atom
+
+**CommonJS `require`**
+
+```js
+const { Atom, deref, set, swap } = require("@libre/atom");
+```
+
+**Web `<script />` tag**
+
+```js
+const { Atom, deref, set, swap } = window["@libre/atom"];
 ```
 
 ## Documentation
