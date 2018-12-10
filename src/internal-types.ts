@@ -27,7 +27,9 @@ export type Immutable<T> = T extends Primitive
   ? ReadonlyMap<K, V>
   : Readonly<T>;
 
-/** @ignore */
+/**
+ * A value or data structure which cannot be mutated
+ */
 export type DeepImmutable<T> = T extends Primitive
   ? T
   : T extends Array<infer U>
