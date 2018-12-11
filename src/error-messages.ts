@@ -1,2 +1,2 @@
 /** @ignore */
-export const derefArgMustBeAtom = "deref only accepts Atom instances, but got:";
+export const expectedAtomButGot = "Expected an Atom instances, but got:";

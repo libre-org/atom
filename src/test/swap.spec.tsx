@@ -1,4 +1,4 @@
-import { Atom, deref, swap } from "../src";
+import { Atom, deref, swap } from "../../src";
 
 describe("swap function", () => {
   it("is a function", () => {

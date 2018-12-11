@@ -1,5 +1,5 @@
-import * as ErrorMsgs from "../src/error-messages";
-import { Atom, deref } from "./../src";
+import * as ErrorMsgs from "../../src/error-messages";
+import { Atom, deref } from "./../../src";
 
 describe("deref", () => {
   it("is a function", () => {
@@ -12,11 +12,11 @@ describe("deref", () => {
     const num: unknown = 1;
     const str: unknown = "hello";
     const bool: unknown = true;
-    expect(() => deref(pojo as Atom<any>)).toThrow(ErrorMsgs.derefArgMustBeAtom);
-    expect(() => deref(arr as Atom<any>)).toThrow(ErrorMsgs.derefArgMustBeAtom);
-    expect(() => deref(num as Atom<any>)).toThrow(ErrorMsgs.derefArgMustBeAtom);
-    expect(() => deref(str as Atom<any>)).toThrow(ErrorMsgs.derefArgMustBeAtom);
-    expect(() => deref(bool as Atom<any>)).toThrow(ErrorMsgs.derefArgMustBeAtom);
+    expect(() => deref(pojo as Atom<any>)).toThrow(ErrorMsgs.expectedAtomButGot);
+    expect(() => deref(arr as Atom<any>)).toThrow(ErrorMsgs.expectedAtomButGot);
+    expect(() => deref(num as Atom<any>)).toThrow(ErrorMsgs.expectedAtomButGot);
+    expect(() => deref(str as Atom<any>)).toThrow(ErrorMsgs.expectedAtomButGot);
+    expect(() => deref(bool as Atom<any>)).toThrow(ErrorMsgs.expectedAtomButGot);
   });
 
   it("returns the state of the atom", () => {

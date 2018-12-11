@@ -70,6 +70,12 @@
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
+							<h3>Interfaces</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-interface tsd-has-type-parameter"><a href="interfaces/atomconstructoroptions.html" class="tsd-kind-icon">Atom<wbr>Constructor<wbr>Options</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
 							<h3>Type aliases</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-type-alias tsd-has-type-parameter"><a href="globals.html#atomstate" class="tsd-kind-icon">Atom<wbr>State</a></li>
@@ -80,7 +86,9 @@
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-function tsd-has-type-parameter"><a href="globals.html#deref" class="tsd-kind-icon">deref</a></li>
+								<li class="tsd-kind-function tsd-has-type-parameter"><a href="globals.html#getvalidator" class="tsd-kind-icon">get<wbr>Validator</a></li>
 								<li class="tsd-kind-function tsd-has-type-parameter"><a href="globals.html#set" class="tsd-kind-icon">set</a></li>
+								<li class="tsd-kind-function tsd-has-type-parameter"><a href="globals.html#setvalidator" class="tsd-kind-icon">set<wbr>Validator</a></li>
 								<li class="tsd-kind-function tsd-has-type-parameter"><a href="globals.html#swap" class="tsd-kind-icon">swap</a></li>
 							</ul>
 						</section>
@@ -95,7 +103,7 @@
 					<div class="tsd-signature tsd-kind-icon">Atom<wbr>State<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">AtomState&lt;A&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in internal-types.ts:16</li>
+							<li>Defined in internal-types.ts:33</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -118,7 +126,7 @@ swap(state, increment);</code></pre>
 					<div class="tsd-signature tsd-kind-icon">Deep<wbr>Immutable<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">DeepImmutable&lt;T&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in internal-types.ts:33</li>
+							<li>Defined in internal-types.ts:50</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -140,12 +148,12 @@ swap(state, increment);</code></pre>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in atom.ts:102</li>
+									<li>Defined in atom.ts:104</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Reads (i.e. &quot;<em>dereferences</em>&quot;) the current state of an <a href="classes/atom.html">Atom</a>. The dereferenced value
+									<p>Dereferences (i.e. &quot;<em>reads</em>&quot;) the current state of an <a href="classes/atom.html">Atom</a>. The dereferenced value
 									should <strong><em>not</em></strong> be mutated.</p>
 								</div>
 								<dl class="tsd-comment-tags">
@@ -179,6 +187,54 @@ deref(stateAtom) <span class="hljs-comment">// =&gt; { count: 0 }</span></code><
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-has-type-parameter">
+					<a name="getvalidator" class="tsd-anchor"></a>
+					<h3>get<wbr>Validator</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-has-type-parameter">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Validator&lt;S&gt;<span class="tsd-signature-symbol">(</span>atom<span class="tsd-signature-symbol">: </span><a href="classes/atom.html" class="tsd-signature-type">Atom</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">S</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">NonNullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="interfaces/atomconstructoroptions.html#validator" class="tsd-signature-type">validator</a><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in atom.ts:212</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Gets <code>atom</code>&#39;s validator function</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>example</dt>
+									<dd><pre><code class="language-js">
+<span class="hljs-keyword">import</span> {Atom, deref, getValidator, swap} <span class="hljs-keyword">from</span> <span class="hljs-string">'@libre/atom'</span>
+
+<span class="hljs-keyword">const</span> atom = Atom.of({ <span class="hljs-attr">count</span>: <span class="hljs-number">0</span> }, { <span class="hljs-attr">validator</span>: <span class="hljs-function">(<span class="hljs-params">state</span>) =&gt;</span> isEven(state.count) })
+<span class="hljs-keyword">const</span> validator = getValidator(atom)
+validator({ <span class="hljs-attr">count</span>: <span class="hljs-number">3</span> }) <span class="hljs-comment">// =&gt; false</span>
+validator({ <span class="hljs-attr">count</span>: <span class="hljs-number">2</span> }) <span class="hljs-comment">// =&gt; true</span></code></pre>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>S</h4>
+									<div class="tsd-comment tsd-typography">
+										<p>the type of <code>atom</code>&#39;s inner state</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>atom: <a href="classes/atom.html" class="tsd-signature-type">Atom</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">S</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">NonNullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="interfaces/atomconstructoroptions.html#validator" class="tsd-signature-type">validator</a><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-has-type-parameter">
 					<a name="set" class="tsd-anchor"></a>
 					<h3>set</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-has-type-parameter">
@@ -188,7 +244,7 @@ deref(stateAtom) <span class="hljs-comment">// =&gt; { count: 0 }</span></code><
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in atom.ts:161</li>
+									<li>Defined in atom.ts:174</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -199,8 +255,7 @@ deref(stateAtom) <span class="hljs-comment">// =&gt; { count: 0 }</span></code><
 								<dl class="tsd-comment-tags">
 									<dt>example</dt>
 									<dd><pre><code class="language-js">
-<span class="hljs-keyword">import</span> {Atom, useAtom, set} <span class="hljs-keyword">from</span> <span class="hljs-string">'@libre/atom'</span>
-<span class="hljs-keyword">import</span> { DeepImmutable } <span class="hljs-keyword">from</span> <span class="hljs-string">'./internal-types'</span>;
+<span class="hljs-keyword">import</span> {Atom, deref, set} <span class="hljs-keyword">from</span> <span class="hljs-string">'@libre/atom'</span>
 
 <span class="hljs-keyword">const</span> atom = Atom.of({ <span class="hljs-attr">count</span>: <span class="hljs-number">0</span> })
 
@@ -213,6 +268,9 @@ deref(atom) <span class="hljs-comment">// =&gt; { count: 100 }</span></code></pr
 							<ul class="tsd-type-parameters">
 								<li>
 									<h4>S</h4>
+									<div class="tsd-comment tsd-typography">
+										<p>the type of <code>atom</code>&#39;s inner state</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -235,6 +293,63 @@ deref(atom) <span class="hljs-comment">// =&gt; { count: 100 }</span></code></pr
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-has-type-parameter">
+					<a name="setvalidator" class="tsd-anchor"></a>
+					<h3>set<wbr>Validator</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-has-type-parameter">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Validator&lt;S&gt;<span class="tsd-signature-symbol">(</span>atom<span class="tsd-signature-symbol">: </span><a href="classes/atom.html" class="tsd-signature-type">Atom</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">S</span><span class="tsd-signature-symbol">&gt;</span>, validator<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">NonNullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="interfaces/atomconstructoroptions.html#validator" class="tsd-signature-type">validator</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in atom.ts:244</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Sets the <code>validator</code> for <code>atom</code>. <code>validator</code> must be a pure function of one argument,
+										which will be passed the intended new state on any state change. If the new state is
+										unacceptable, <code>validator</code> should return false or throw an exception. If the current state
+										is not acceptable to the new validator, an exception will be thrown and the validator will
+									not be changed.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>example</dt>
+									<dd><pre><code class="language-js">
+<span class="hljs-keyword">import</span> {Atom, deref, setValidator, set} <span class="hljs-keyword">from</span> <span class="hljs-string">'@libre/atom'</span>
+
+<span class="hljs-keyword">const</span> atom = Atom.of({ <span class="hljs-attr">count</span>: <span class="hljs-number">0</span> }, {<span class="hljs-attr">validator</span>: <span class="hljs-function">(<span class="hljs-params">state</span>) =&gt;</span> isNumber(state.count) })
+setValidator(atom, (state) =&gt; isOdd(state.count)) <span class="hljs-comment">// Error; new validator rejected</span>
+set(atom, {<span class="hljs-attr">count</span>: <span class="hljs-string">"not number"</span>}) <span class="hljs-comment">// Error; new state not set</span>
+setValidator(atom, (state) =&gt; isEven(state.count)) <span class="hljs-comment">// All good</span>
+set(atom, {<span class="hljs-attr">count</span>: <span class="hljs-number">2</span>}) <span class="hljs-comment">// All good</span>
+</code></pre>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>S</h4>
+									<div class="tsd-comment tsd-typography">
+										<p>the type of <code>atom</code>&#39;s inner state</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>atom: <a href="classes/atom.html" class="tsd-signature-type">Atom</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">S</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+								<li>
+									<h5>validator: <span class="tsd-signature-type">NonNullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="interfaces/atomconstructoroptions.html#validator" class="tsd-signature-type">validator</a><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-has-type-parameter">
 					<a name="swap" class="tsd-anchor"></a>
 					<h3>swap</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-has-type-parameter">
@@ -244,7 +359,7 @@ deref(atom) <span class="hljs-comment">// =&gt; { count: 100 }</span></code></pr
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in atom.ts:132</li>
+									<li>Defined in atom.ts:131</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -268,6 +383,9 @@ deref(atom) <span class="hljs-comment">// =&gt; { count: 100 }</span></code></pr
 							<ul class="tsd-type-parameters">
 								<li>
 									<h4>S</h4>
+									<div class="tsd-comment tsd-typography">
+										<p>the type of <code>atom</code>&#39;s inner state</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -322,6 +440,9 @@ deref(atom) <span class="hljs-comment">// =&gt; { count: 100 }</span></code></pr
 					<li class=" tsd-kind-class tsd-has-type-parameter">
 						<a href="classes/atom.html" class="tsd-kind-icon">Atom</a>
 					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/atomconstructoroptions.html" class="tsd-kind-icon">Atom<wbr>Constructor<wbr>Options</a>
+					</li>
 					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
 						<a href="globals.html#atomstate" class="tsd-kind-icon">Atom<wbr>State</a>
 					</li>
@@ -332,7 +453,13 @@ deref(atom) <span class="hljs-comment">// =&gt; { count: 100 }</span></code></pr
 						<a href="globals.html#deref" class="tsd-kind-icon">deref</a>
 					</li>
 					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#getvalidator" class="tsd-kind-icon">get<wbr>Validator</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
 						<a href="globals.html#set" class="tsd-kind-icon">set</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#setvalidator" class="tsd-kind-icon">set<wbr>Validator</a>
 					</li>
 					<li class=" tsd-kind-function tsd-has-type-parameter">
 						<a href="globals.html#swap" class="tsd-kind-icon">swap</a>
