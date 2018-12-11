@@ -148,7 +148,7 @@ swap(state, increment);</code></pre>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in atom.ts:104</li>
+									<li>Defined in deref.ts:22</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -196,7 +196,7 @@ deref(stateAtom) <span class="hljs-comment">// =&gt; { count: 0 }</span></code><
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in atom.ts:212</li>
+									<li>Defined in getValidator.ts:24</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -244,7 +244,7 @@ validator({ <span class="hljs-attr">count</span>: <span class="hljs-number">2</s
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in atom.ts:174</li>
+									<li>Defined in set.ts:27</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -302,7 +302,7 @@ deref(atom) <span class="hljs-comment">// =&gt; { count: 100 }</span></code></pr
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in atom.ts:244</li>
+									<li>Defined in setValidator.ts:30</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -317,6 +317,7 @@ deref(atom) <span class="hljs-comment">// =&gt; { count: 100 }</span></code></pr
 									<dt>example</dt>
 									<dd><pre><code class="language-js">
 <span class="hljs-keyword">import</span> {Atom, deref, setValidator, set} <span class="hljs-keyword">from</span> <span class="hljs-string">'@libre/atom'</span>
+<span class="hljs-keyword">import</span> { _setValidator } <span class="hljs-keyword">from</span> <span class="hljs-string">'./internal-state'</span>;
 
 <span class="hljs-keyword">const</span> atom = Atom.of({ <span class="hljs-attr">count</span>: <span class="hljs-number">0</span> }, {<span class="hljs-attr">validator</span>: <span class="hljs-function">(<span class="hljs-params">state</span>) =&gt;</span> isNumber(state.count) })
 setValidator(atom, (state) =&gt; isOdd(state.count)) <span class="hljs-comment">// Error; new validator rejected</span>
@@ -359,7 +360,7 @@ set(atom, {<span class="hljs-attr">count</span>: <span class="hljs-number">2</sp
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in atom.ts:131</li>
+									<li>Defined in swap.ts:25</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">

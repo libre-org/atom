@@ -1,4 +1,4 @@
-import { Atom, deref, set } from "../../src/atom";
+import { Atom, deref, set } from "../../src";
 
 describe("set function", () => {
   it("is a function", () => {

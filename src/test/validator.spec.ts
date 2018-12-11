@@ -1,5 +1,4 @@
-import { Atom, deref, set, swap } from "../../src";
-import { getValidator, setValidator } from "../atom";
+import { Atom, deref, getValidator, set, setValidator, swap } from "../../src";
 
 describe("Atom state validation", () => {
   describe("Atom.of(state, { validator })", () => {
