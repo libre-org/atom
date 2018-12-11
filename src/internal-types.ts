@@ -1,4 +1,21 @@
+// tslint:disable:no-redundant-jsdoc
 import { Atom } from "./atom";
+
+/**
+ * Optional paramaters accepted by [[Atom.of]]
+ *
+ * @param <S> the type of the [[Atom]]'s inner state
+ */
+export interface AtomConstructorOptions<S> {
+  /**
+   * Validates the next state of an [[Atom]] during [[Atom.of]], [[swap]],
+   * and [[set]]. It should either return a `boolean` or throw an error. If it
+   * returns `false`, then an Error is thrown and the new state is not committed.
+   *
+   * @default `() => true`
+   */
+  validator?(state: DeepImmutable<S>): boolean;
+}
 
 /**
  * Extracts the type info of an [[Atom]]'s inner state
