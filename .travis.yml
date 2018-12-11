@@ -13,10 +13,13 @@ script:
 before_deploy:
   - npm run build
 deploy:
+  on:
+    node: 10
   provider: script
   skip_cleanup: true
   script:
     - npx semantic-release
+
 after_success:
   - npx codecov
 branches:
