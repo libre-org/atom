@@ -1,6 +1,5 @@
 // tslint:disable:no-redundant-jsdoc
 import { Atom } from "./atom";
-
 /**
  * Optional paramaters accepted by [[Atom.of]]
  *

@@ -1,5 +1,6 @@
 import { Atom } from "./atom";
 import * as ErrorMsgs from "./error-messages";
+import { _getState } from "./internal-state";
 
 /** @ignore */
 export function _prettyPrint(val: any): string {

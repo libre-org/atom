@@ -10,7 +10,8 @@
     "jsdoc-format": false,
     "no-redundant-jsdoc": true,
     "no-shadowed-variable": false,
-    "no-string-literal": false
+    "no-string-literal": false,
+    "only-arrow-functions": false
   },
   "rulesDirectory": []
 }

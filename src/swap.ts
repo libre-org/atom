@@ -1,5 +1,5 @@
 import { Atom } from "./atom";
-import { _getState, _getValidator, _setState } from "./internal-state";
+import { _getState, _getValidator, _runChangeHandlers, _setState } from "./internal-state";
 import { DeepImmutable } from "./internal-types";
 import { _prettyPrint, _throwIfNotAtom } from "./utils";
 
@@ -37,5 +37,6 @@ export function swap<S>(atom: Atom<S>, updateFn: (state: DeepImmutable<S>) => S)
     throw err;
   } else {
     _setState(atom, nextState);
+    _runChangeHandlers(atom);
   }
 }

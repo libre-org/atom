@@ -85,8 +85,10 @@
 						<section class="tsd-index-section ">
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-function tsd-has-type-parameter"><a href="globals.html#addchangehandler" class="tsd-kind-icon">add<wbr>Change<wbr>Handler</a></li>
 								<li class="tsd-kind-function tsd-has-type-parameter"><a href="globals.html#deref" class="tsd-kind-icon">deref</a></li>
 								<li class="tsd-kind-function tsd-has-type-parameter"><a href="globals.html#getvalidator" class="tsd-kind-icon">get<wbr>Validator</a></li>
+								<li class="tsd-kind-function tsd-has-type-parameter"><a href="globals.html#removechangehandler" class="tsd-kind-icon">remove<wbr>Change<wbr>Handler</a></li>
 								<li class="tsd-kind-function tsd-has-type-parameter"><a href="globals.html#set" class="tsd-kind-icon">set</a></li>
 								<li class="tsd-kind-function tsd-has-type-parameter"><a href="globals.html#setvalidator" class="tsd-kind-icon">set<wbr>Validator</a></li>
 								<li class="tsd-kind-function tsd-has-type-parameter"><a href="globals.html#swap" class="tsd-kind-icon">swap</a></li>
@@ -103,7 +105,7 @@
 					<div class="tsd-signature tsd-kind-icon">Atom<wbr>State<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">AtomState&lt;A&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in internal-types.ts:33</li>
+							<li>Defined in internal-types.ts:32</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -126,7 +128,7 @@ swap(state, increment);</code></pre>
 					<div class="tsd-signature tsd-kind-icon">Deep<wbr>Immutable<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">DeepImmutable&lt;T&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in internal-types.ts:50</li>
+							<li>Defined in internal-types.ts:49</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -138,6 +140,79 @@ swap(state, increment);</code></pre>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Functions</h2>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-has-type-parameter">
+					<a name="addchangehandler" class="tsd-anchor"></a>
+					<h3>add<wbr>Change<wbr>Handler</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-has-type-parameter">
+						<li class="tsd-signature tsd-kind-icon">add<wbr>Change<wbr>Handler&lt;S&gt;<span class="tsd-signature-symbol">(</span>atom<span class="tsd-signature-symbol">: </span><a href="classes/atom.html" class="tsd-signature-type">Atom</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">S</span><span class="tsd-signature-symbol">&gt;</span>, key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, handler<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">function</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in changeHandler.ts:23</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Registers a function to be run each time the state of <code>atom</code> changes.</p>
+								</div>
+								<p>Will throw an Error if <code>key</code> is already taken by another handler.</p>
+								<dl class="tsd-comment-tags">
+									<dt>example</dt>
+									<dd><pre><code class="language-js">
+<span class="hljs-keyword">import</span> {Atom, addChangeHandler, swap} <span class="hljs-keyword">from</span> <span class="hljs-string">'@libre/atom'</span>
+
+<span class="hljs-keyword">const</span> countAtom = Atom.of({ <span class="hljs-attr">count</span>: <span class="hljs-number">0</span> })
+
+addChangeHandler(countAtom, <span class="hljs-string">"log"</span>, (state) =&gt; { <span class="hljs-built_in">console</span>.log(state) })
+
+swap(countAtom, (state) =&gt; ({ <span class="hljs-attr">count</span>: state.count + <span class="hljs-number">1</span> }))
+
+<span class="hljs-comment">// stdout logs: { count: 1 }</span></code></pre>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>S</h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>atom: <a href="classes/atom.html" class="tsd-signature-type">Atom</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">S</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+								<li>
+									<h5>key: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>handler: <span class="tsd-signature-type">function</span></h5>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter-siganture">
+											<ul class="tsd-signatures tsd-kind-type-literal tsd-is-not-exported">
+												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>state<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">S</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+											</ul>
+											<ul class="tsd-descriptions">
+												<li class="tsd-description">
+													<h4 class="tsd-parameters-title">Parameters</h4>
+													<ul class="tsd-parameters">
+														<li>
+															<h5>state: <span class="tsd-signature-type">S</span></h5>
+														</li>
+													</ul>
+													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-has-type-parameter">
 					<a name="deref" class="tsd-anchor"></a>
 					<h3>deref</h3>
@@ -231,6 +306,44 @@ validator({ <span class="hljs-attr">count</span>: <span class="hljs-number">2</s
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">NonNullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="interfaces/atomconstructoroptions.html#validator" class="tsd-signature-type">validator</a><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-has-type-parameter">
+					<a name="removechangehandler" class="tsd-anchor"></a>
+					<h3>remove<wbr>Change<wbr>Handler</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-has-type-parameter">
+						<li class="tsd-signature tsd-kind-icon">remove<wbr>Change<wbr>Handler&lt;S&gt;<span class="tsd-signature-symbol">(</span>atom<span class="tsd-signature-symbol">: </span><a href="classes/atom.html" class="tsd-signature-type">Atom</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">S</span><span class="tsd-signature-symbol">&gt;</span>, key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in changeHandler.ts:31</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Deletes the <code>key</code> and the handler associated with <code>key</code> so that it not longer runs
+									when the state of <code>atom</code> changes.</p>
+								</div>
+							</div>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>S</h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>atom: <a href="classes/atom.html" class="tsd-signature-type">Atom</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">S</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+								<li>
+									<h5>key: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -451,10 +564,16 @@ set(atom, {<span class="hljs-attr">count</span>: <span class="hljs-number">2</sp
 						<a href="globals.html#deepimmutable" class="tsd-kind-icon">Deep<wbr>Immutable</a>
 					</li>
 					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#addchangehandler" class="tsd-kind-icon">add<wbr>Change<wbr>Handler</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
 						<a href="globals.html#deref" class="tsd-kind-icon">deref</a>
 					</li>
 					<li class=" tsd-kind-function tsd-has-type-parameter">
 						<a href="globals.html#getvalidator" class="tsd-kind-icon">get<wbr>Validator</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#removechangehandler" class="tsd-kind-icon">remove<wbr>Change<wbr>Handler</a>
 					</li>
 					<li class=" tsd-kind-function tsd-has-type-parameter">
 						<a href="globals.html#set" class="tsd-kind-icon">set</a>

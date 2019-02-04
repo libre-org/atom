@@ -1,4 +1,4 @@
-import { _getState, _setState, _setValidator, _useNextAtomId } from "./internal-state";
+import { _getState, _initChangeHandlerDict, _setState, _setValidator, _useNextAtomId } from "./internal-state";
 import { AtomConstructorOptions, DeepImmutable } from "./internal-types";
 import { _prettyPrint } from "./utils";
 
@@ -48,6 +48,7 @@ const a3 = Atom.of({ count: 0 })
     Object.defineProperty(this, "$$id", { value: _useNextAtomId() });
     _setState(this, state);
     _setValidator(this, validator);
+    _initChangeHandlerDict(this);
     return this;
   }
   /** @ignore */

@@ -1,5 +1,5 @@
 import { Atom } from "./atom";
-import { _getValidator, _setState } from "./internal-state";
+import { _getValidator, _runChangeHandlers, _setState } from "./internal-state";
 import { DeepImmutable } from "./internal-types";
 import { _prettyPrint, _throwIfNotAtom } from "./utils";
 
@@ -38,5 +38,6 @@ export function set<S>(atom: Atom<S>, nextState: S): void {
     throw err;
   } else {
     _setState(atom, nextState);
+    _runChangeHandlers(atom);
   }
 }
