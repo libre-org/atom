@@ -22,7 +22,7 @@ import { _prettyPrint, _throwIfNotAtom } from "./utils";
  *}));
  * ```
  */
-export function swap<S>(atom: Atom<S>, updateFn: (state: DeepImmutable<S>) => S): void {
+export function swap<S>(atom: Atom<S>, updateFn: (state: S) => S): void {
   _throwIfNotAtom(atom);
   const prevState = _getState(atom);
   const nextState = updateFn(prevState);

@@ -21,5 +21,5 @@ deref(stateAtom) // => { count: 0 }
  */
 export function deref<S>(atom: Atom<S>): DeepImmutable<S> {
   _throwIfNotAtom(atom);
-  return _getState(atom);
+  return _getState(atom) as DeepImmutable<S>;
 }
