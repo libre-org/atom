@@ -150,7 +150,7 @@ swap(state, increment);</code></pre>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in changeHandler.ts:23</li>
+									<li>Defined in changeHandler.ts:29</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -165,11 +165,17 @@ swap(state, increment);</code></pre>
 
 <span class="hljs-keyword">const</span> countAtom = Atom.of({ <span class="hljs-attr">count</span>: <span class="hljs-number">0</span> })
 
-addChangeHandler(countAtom, <span class="hljs-string">"log"</span>, (state) =&gt; { <span class="hljs-built_in">console</span>.log(state) })
+addChangeHandler(countAtom, <span class="hljs-string">"log"</span>, ({current, previous}) =&gt; {
+<span class="hljs-built_in">console</span>.log(previous, current)
+})
 
 swap(countAtom, (state) =&gt; ({ <span class="hljs-attr">count</span>: state.count + <span class="hljs-number">1</span> }))
 
-<span class="hljs-comment">// stdout logs: { count: 1 }</span></code></pre>
+
+<span class="hljs-comment">// stdout logs:</span>
+<span class="hljs-comment">// { count: 0 }</span>
+<span class="hljs-comment">// { count: 1 }</span>
+</code></pre>
 									</dd>
 								</dl>
 							</div>
@@ -321,7 +327,7 @@ validator({ <span class="hljs-attr">count</span>: <span class="hljs-number">2</s
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in changeHandler.ts:35</li>
+									<li>Defined in changeHandler.ts:65</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -329,6 +335,23 @@ validator({ <span class="hljs-attr">count</span>: <span class="hljs-number">2</s
 									<p>Deletes the <code>key</code> and the handler associated with <code>key</code> so that it not longer runs
 									when the state of <code>atom</code> changes.</p>
 								</div>
+								<ul>
+									<li>@example
+									<code>`</code>js</li>
+								</ul>
+								<p>import {Atom, addChangeHandler, removeChangeHandler, swap} from &#39;@libre/atom&#39;</p>
+								<p>const countAtom = Atom.of({ count: 0 })</p>
+								<p>addChangeHandler(countAtom, &quot;log&quot;, ({current, previous}) =&gt; {
+									console.log(previous, current)
+								})</p>
+								<p>swap(countAtom, (state) =&gt; ({ count: state.count + 1 }))</p>
+								<p>// stdout logs:
+									// { count: 0 }
+								// { count: 1 }</p>
+								<p>removeChangeHandler(atom, &quot;log&quot;)</p>
+								<p>swap(countAtom, (state) =&gt; ({ count: state.count + 1 }))</p>
+								<p>// nothing is logged
+								<code>`</code></p>
 							</div>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
 							<ul class="tsd-type-parameters">
