@@ -12,7 +12,7 @@ export function _useNextAtomId() {
 }
 
 /** @ignore */
-export function _getState<S>(atom: Atom<S>): DeepImmutable<S> {
+export function _getState<S>(atom: Atom<S>): S {
   return stateByAtomId[atom["$$id"]];
 }
 /** @ignore */

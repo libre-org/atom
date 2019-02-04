@@ -20,7 +20,6 @@ describe("swap function", () => {
     const TEST_ATOM_A = Atom.of(a);
     const TEST_ATOM_B = Atom.of(b);
     const TEST_ATOM_C = Atom.of(c);
-
     expect(deref(TEST_ATOM_A)).toBe(a);
     expect(deref(TEST_ATOM_B)).toBe(b);
     expect(deref(TEST_ATOM_C)).toBe(c);
