@@ -1,3 +1,4 @@
+export { addChangeHandler, removeChangeHandler } from "./changeHandler";
 export { Atom } from "./atom";
 export { AtomState } from "./internal-types";
 export { deref } from "./deref";
