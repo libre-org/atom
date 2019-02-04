@@ -1,16 +1,17 @@
 // tslint:disable:no-console
-
-import { addChangeHandler, Atom, removeChangeHandler, set, swap } from "../../src";
+import { addChangeHandler, Atom, deref, removeChangeHandler, set, swap } from "../../src";
 
 describe("Atom change handlers", function() {
   describe("addChangeHandler", function() {
-    it("registers a function of type (state -> void) that runs on every state change", function() {
+    it("registers a function that takes named params of `previous` and `current` state that runs on every state change", function() {
       const testAtom = Atom.of(1);
-      const logSpy = spyOn(console, "log");
-      function print<S>(x: S) {
-        console.log(x);
-      }
-      addChangeHandler(testAtom, "print", print);
+      const mock = { log: (...args: any[]) => null };
+      const logSpy = spyOn(mock, "log");
+      addChangeHandler(testAtom, "print", ({ previous, current }) => {
+        expect(previous).not.toBe(current);
+        expect(current).toBe(deref(testAtom));
+        mock.log(previous, current);
+      });
       swap(testAtom, x => x + 1);
       set(testAtom, 0);
       swap(testAtom, x => x + 1);
@@ -27,11 +28,13 @@ describe("Atom change handlers", function() {
   describe("removeChangeHandler", function() {
     it("unregisters the handler function at specified key so that it no longer runs on state change", function() {
       const testAtom = Atom.of(1);
-      const logSpy = spyOn(console, "log");
-      function print<S>(x: S) {
-        console.log(x);
-      }
-      addChangeHandler(testAtom, "print", print);
+      const mock = { log: (...args: any[]) => null };
+      const logSpy = spyOn(mock, "log");
+      addChangeHandler(testAtom, "print", ({ previous, current }) => {
+        expect(previous).not.toBe(current);
+        expect(current).toBe(deref(testAtom));
+        mock.log(previous, current);
+      });
       swap(testAtom, x => x + 1);
       removeChangeHandler(testAtom, "print");
       set(testAtom, 0);

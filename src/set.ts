@@ -1,4 +1,5 @@
 import { Atom } from "./atom";
+import { deref } from "./deref";
 import { _getValidator, _runChangeHandlers, _setState } from "./internal-state";
 import { DeepImmutable } from "./internal-types";
 import { _prettyPrint, _throwIfNotAtom } from "./utils";
@@ -37,7 +38,8 @@ export function set<S>(atom: Atom<S>, nextState: S): void {
 
     throw err;
   } else {
+    const prevState = deref(atom);
     _setState(atom, nextState);
-    _runChangeHandlers(atom);
+    _runChangeHandlers(atom, prevState as S, nextState);
   }
 }
