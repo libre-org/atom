@@ -38,7 +38,7 @@ export function addChangeHandler<S>(
  * Deletes the `key` and the handler associated with `key` so that it not longer runs
  * when the state of `atom` changes.
  *
- *  * @example
+ * @example
 ```js
 
 import {Atom, addChangeHandler, removeChangeHandler, swap} from '@libre/atom'
