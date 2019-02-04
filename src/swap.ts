@@ -24,7 +24,8 @@ import { _prettyPrint, _throwIfNotAtom } from "./utils";
  */
 export function swap<S>(atom: Atom<S>, updateFn: (state: DeepImmutable<S>) => S): void {
   _throwIfNotAtom(atom);
-  const nextState = updateFn(_getState(atom));
+  const prevState = _getState(atom);
+  const nextState = updateFn(prevState);
   const validator = _getValidator(atom);
   const didValidate = validator(nextState as DeepImmutable<S>);
   if (!didValidate) {
@@ -37,6 +38,6 @@ export function swap<S>(atom: Atom<S>, updateFn: (state: DeepImmutable<S>) => S)
     throw err;
   } else {
     _setState(atom, nextState);
-    _runChangeHandlers(atom);
+    _runChangeHandlers(atom, prevState as S, nextState);
   }
 }

@@ -36,7 +36,11 @@ export function _initChangeHandlerDict(atom: Atom<any>) {
 }
 
 /** @ignore */
-export function _addChangeHandler<S>(atom: Atom<S>, key: string, handler: (state: S) => void) {
+export function _addChangeHandler<S>(
+  atom: Atom<S>,
+  key: string,
+  handler: (states: { previous: S; current: S }) => void
+) {
   if (typeof changeHandlersByAtomId[atom["$$id"]][key] === "function") {
     throw new Error(
       `Change handler already registered for key "${key}" on ${atom}.\nRemove the existing handler before registering a new one.`
@@ -51,8 +55,8 @@ export function _removeChangeHandler<S>(atom: Atom<S>, key: string) {
 }
 
 /** @ignore */
-export function _runChangeHandlers<S>(atom: Atom<S>) {
+export function _runChangeHandlers<S>(atom: Atom<S>, previous: S, current: S) {
   Object.keys(changeHandlersByAtomId[atom["$$id"]]).forEach(k => {
-    changeHandlersByAtomId[atom["$$id"]][k](_getState(atom));
+    changeHandlersByAtomId[atom["$$id"]][k]({ previous, current });
   });
 }
