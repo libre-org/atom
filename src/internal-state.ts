@@ -57,6 +57,8 @@ export function _removeChangeHandler<S>(atom: Atom<S>, key: string) {
 /** @ignore */
 export function _runChangeHandlers<S>(atom: Atom<S>, previous: S, current: S) {
   Object.keys(changeHandlersByAtomId[atom["$$id"]]).forEach(k => {
-    changeHandlersByAtomId[atom["$$id"]][k]({ previous, current });
+    if (typeof changeHandlersByAtomId[atom["$$id"]][k] === "function") {
+      changeHandlersByAtomId[atom["$$id"]][k]({ previous, current });
+    }
   });
 }
