@@ -42,4 +42,37 @@ describe("Atom change handlers", function() {
       expect(logSpy).toHaveBeenCalledTimes(1);
     });
   });
+
+  describe("Integration: addChangeHandler & removeChangehandler", function() {
+    describe("Handlers removed by upstream handlers", function() {
+      it("allows prior handlers to remove later handlers without causing undefinded-is-not-a-function errors", function() {
+        const testAtom = Atom.of({ count: 0 });
+        addChangeHandler(testAtom, "handler1", () => {
+          removeChangeHandler(testAtom, "handler2");
+        });
+        addChangeHandler(testAtom, "handler2", () => {
+          removeChangeHandler(testAtom, "handler1");
+        });
+
+        expect(() => swap(testAtom, s => ({ count: s.count + 1 }))).not.toThrowError(/not a function/);
+      });
+
+      it("does not run handlers removed by earlier handlers", function() {
+        const nooper = { noop: () => null };
+        const noopSpy = spyOn(nooper, "noop");
+        const testAtom = Atom.of({ count: 0 });
+        addChangeHandler(testAtom, "handler1", () => {
+          removeChangeHandler(testAtom, "handler2");
+        });
+
+        addChangeHandler(testAtom, "handler2", () => {
+          nooper.noop();
+          removeChangeHandler(testAtom, "handler1");
+        });
+
+        swap(testAtom, s => ({ count: s.count + 1 }));
+        expect(noopSpy).toHaveBeenCalledTimes(0);
+      });
+    });
+  });
 });
