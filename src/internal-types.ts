@@ -46,13 +46,14 @@ export type Immutable<T> = T extends Primitive
 /**
  * A value or data structure which cannot be mutated
  */
-export type DeepImmutable<T> = T extends Primitive
-  ? T
-  : T extends Array<infer U>
-  ? DeepImmutableArray<U>
-  : T extends Map<infer K, infer V>
-  ? DeepImmutableMap<K, V>
-  : DeepImmutableObject<T>;
+export declare type DeepImmutable<T> = T &
+  (T extends Primitive
+    ? T
+    : T extends Array<infer U>
+    ? DeepImmutableArray<U>
+    : T extends Map<infer K, infer V>
+    ? DeepImmutableMap<K, V>
+    : DeepImmutableObject<T>);
 
 /** @ignore */
 export interface DeepImmutableArray<T> extends ReadonlyArray<DeepImmutable<T>> {}
