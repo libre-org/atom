@@ -125,7 +125,7 @@ swap(state, increment);</code></pre>
 				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-has-type-parameter">
 					<a name="deepimmutable" class="tsd-anchor"></a>
 					<h3>Deep<wbr>Immutable</h3>
-					<div class="tsd-signature tsd-kind-icon">Deep<wbr>Immutable<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">DeepImmutable&lt;T&gt;</span></div>
+					<div class="tsd-signature tsd-kind-icon">Deep<wbr>Immutable<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">T</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-type">T extends Primitive ? T : T extends (infer U)[] ? DeepImmutableArray&lt;U&gt; : T extends Map&lt;infer K, infer V&gt; ? DeepImmutableMap&lt;K, V&gt; : DeepImmutableObject&lt;T&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
 							<li>Defined in internal-types.ts:49</li>
