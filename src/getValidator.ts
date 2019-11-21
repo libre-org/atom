@@ -2,7 +2,7 @@ import { Atom } from "./atom";
 import { _getValidator } from "./internal-state";
 import { AtomConstructorOptions } from "./internal-types";
 
-import { _throwIfNotAtom } from "./utils";
+import { throwIfNotAtom } from "./throwIfNotAtom";
 
 /**
  * Gets `atom`'s validator function
@@ -22,6 +22,6 @@ validator({ count: 2 }) // => true
  */
 
 export function getValidator<S>(atom: Atom<S>): NonNullable<AtomConstructorOptions<any>["validator"]> {
-  _throwIfNotAtom(atom);
+  throwIfNotAtom(atom);
   return _getValidator(atom);
 }

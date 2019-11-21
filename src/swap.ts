@@ -1,7 +1,8 @@
 import { Atom } from "./atom";
 import { _getState, _getValidator, _runChangeHandlers, _setState } from "./internal-state";
 import { DeepImmutable } from "./internal-types";
-import { _prettyPrint, _throwIfNotAtom } from "./utils";
+import { prettyPrint } from "./prettyPrint";
+import { throwIfNotAtom } from "./throwIfNotAtom";
 
 /**
  * Swaps `atom`'s state with the value returned from applying `updateFn` to `atom`'s
@@ -15,6 +16,7 @@ import { _prettyPrint, _throwIfNotAtom } from "./utils";
  * ```jsx
  *
  *import {Atom, swap} from '@libre/atom'
+import {prettyPrint} from './prettyPrint'
  *
  *const stateAtom = Atom.of({ count: 0 })
  *const increment = () => swap(stateAtom, (state) => ({
@@ -23,13 +25,13 @@ import { _prettyPrint, _throwIfNotAtom } from "./utils";
  * ```
  */
 export function swap<S>(atom: Atom<S>, updateFn: (state: S) => S): void {
-  _throwIfNotAtom(atom);
+  throwIfNotAtom(atom);
   const prevState = _getState(atom);
   const nextState = updateFn(prevState);
   const validator = _getValidator(atom);
   const didValidate = validator(nextState as DeepImmutable<S>);
   if (!didValidate) {
-    const errMsg = `swap updateFn\n${updateFn}\n\nattempted to swap the state of\n\n${atom}\n\nwith:\n\n${_prettyPrint(
+    const errMsg = `swap updateFn\n${updateFn}\n\nattempted to swap the state of\n\n${atom}\n\nwith:\n\n${prettyPrint(
       nextState
     )}\n\nbut it did not pass validator:\n${validator}\n\n`;
     const err = Error(errMsg);

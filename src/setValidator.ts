@@ -1,7 +1,7 @@
 import { Atom } from "./atom";
 import { _getState, _setValidator } from "./internal-state";
 import { AtomConstructorOptions } from "./internal-types";
-import { _throwIfNotAtom } from "./utils";
+import { throwIfNotAtom } from "./throwIfNotAtom";
 
 /**
  * Sets the `validator` for `atom`. `validator` must be a pure function of one argument,
@@ -28,7 +28,7 @@ set(atom, {count: 2}) // All good
  */
 
 export function setValidator<S>(atom: Atom<S>, validator: NonNullable<AtomConstructorOptions<any>["validator"]>): void {
-  _throwIfNotAtom(atom);
+  throwIfNotAtom(atom);
   if (!validator(_getState(atom))) {
     const errMsg = `Could not set validator on\n\n${atom}\n\nbecause current state would be invalid according to new validator:\n${validator}\n\n`;
     const err = Error(errMsg);

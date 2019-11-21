@@ -1,7 +1,7 @@
 import { Atom } from "./atom";
 import { _getState } from "./internal-state";
 import { DeepImmutable } from "./internal-types";
-import { _throwIfNotAtom } from "./utils";
+import { throwIfNotAtom } from "./throwIfNotAtom";
 
 /**
  * Dereferences (i.e. "*reads*") the current state of an [[Atom]]. The dereferenced value
@@ -20,6 +20,6 @@ deref(stateAtom) // => { count: 0 }
 ```
  */
 export function deref<S>(atom: Atom<S>): DeepImmutable<S> {
-  _throwIfNotAtom(atom);
+  throwIfNotAtom(atom);
   return _getState(atom) as DeepImmutable<S>;
 }
