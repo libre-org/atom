@@ -8,7 +8,7 @@ import { uglify } from "rollup-plugin-uglify";
 // tslint:disable-next-line:no-var-requires
 const pkg = require("./package.json");
 const tsESM = typescript({
-  tsconfigOverride: { compilerOptions: { target: "es6" } },
+  tsconfigOverride: { compilerOptions: { target: "es5" } },
   useTsconfigDeclarationDir: true
 });
 const tsUMD = typescript({
