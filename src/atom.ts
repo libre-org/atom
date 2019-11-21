@@ -1,6 +1,6 @@
 import { _getState, _initChangeHandlerDict, _setState, _setValidator, _useNextAtomId } from "./internal-state";
 import { AtomConstructorOptions, DeepImmutable } from "./internal-types";
-import { _prettyPrint } from "./utils";
+import { prettyPrint } from "./prettyPrint";
 
 /**
  * A data structure useful for providing a controlled, predictable mechanism for mutability.
@@ -37,7 +37,7 @@ const a3 = Atom.of({ count: 0 })
   private constructor(state: S, { validator }: AtomConstructorOptions<S> = {}) {
     validator = validator || (() => true);
     if (!validator(state as DeepImmutable<S>)) {
-      const errMsg = `Atom initialized with invalid state:\n\n${_prettyPrint(
+      const errMsg = `Atom initialized with invalid state:\n\n${prettyPrint(
         state
       )}\n\naccording to validator function:\n${validator}\n\n`;
       const err = Error(errMsg);
@@ -53,7 +53,7 @@ const a3 = Atom.of({ count: 0 })
   }
   /** @ignore */
   public toString(): string {
-    return `Atom<${_prettyPrint(_getState(this))}>`;
+    return `Atom<${prettyPrint(_getState(this))}>`;
   }
   /** @ignore */
   public inspect(): string {

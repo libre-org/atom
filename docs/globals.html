@@ -105,7 +105,7 @@
 					<div class="tsd-signature tsd-kind-icon">Atom<wbr>State<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">AtomState&lt;A&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in internal-types.ts:32</li>
+							<li>Defined in <a href="https://github.com/libre-org/atom/blob/15aca7c/src/internal-types.ts#L32">internal-types.ts:32</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -128,7 +128,7 @@ swap(state, increment);</code></pre>
 					<div class="tsd-signature tsd-kind-icon">Deep<wbr>Immutable<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">T</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-type">T extends Primitive ? T : T extends (infer U)[] ? DeepImmutableArray&lt;U&gt; : T extends Map&lt;infer K, infer V&gt; ? DeepImmutableMap&lt;K, V&gt; : DeepImmutableObject&lt;T&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in internal-types.ts:49</li>
+							<li>Defined in <a href="https://github.com/libre-org/atom/blob/15aca7c/src/internal-types.ts#L49">internal-types.ts:49</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -150,7 +150,7 @@ swap(state, increment);</code></pre>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in changeHandler.ts:29</li>
+									<li>Defined in <a href="https://github.com/libre-org/atom/blob/15aca7c/src/changeHandler.ts#L29">changeHandler.ts:29</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -231,7 +231,7 @@ swap(countAtom, (state) =&gt; ({ <span class="hljs-attr">count</span>: state.cou
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in deref.ts:22</li>
+									<li>Defined in <a href="https://github.com/libre-org/atom/blob/15aca7c/src/deref.ts#L22">deref.ts:22</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -279,7 +279,7 @@ deref(stateAtom) <span class="hljs-comment">// =&gt; { count: 0 }</span></code><
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in getValidator.ts:24</li>
+									<li>Defined in <a href="https://github.com/libre-org/atom/blob/15aca7c/src/getValidator.ts#L24">getValidator.ts:24</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -327,7 +327,7 @@ validator({ <span class="hljs-attr">count</span>: <span class="hljs-number">2</s
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in changeHandler.ts:65</li>
+									<li>Defined in <a href="https://github.com/libre-org/atom/blob/15aca7c/src/changeHandler.ts#L65">changeHandler.ts:65</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -389,7 +389,7 @@ swap(countAtom, (state) =&gt; ({ <span class="hljs-attr">count</span>: state.cou
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in set.ts:28</li>
+									<li>Defined in <a href="https://github.com/libre-org/atom/blob/15aca7c/src/set.ts#L29">set.ts:29</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -447,7 +447,7 @@ deref(atom) <span class="hljs-comment">// =&gt; { count: 100 }</span></code></pr
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in setValidator.ts:30</li>
+									<li>Defined in <a href="https://github.com/libre-org/atom/blob/15aca7c/src/setValidator.ts#L30">setValidator.ts:30</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -505,7 +505,7 @@ set(atom, {<span class="hljs-attr">count</span>: <span class="hljs-number">2</sp
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in swap.ts:25</li>
+									<li>Defined in <a href="https://github.com/libre-org/atom/blob/15aca7c/src/swap.ts#L27">swap.ts:27</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -517,6 +517,7 @@ set(atom, {<span class="hljs-attr">count</span>: <span class="hljs-number">2</sp
 									<dt>example</dt>
 									<dd><pre><code class="language-jsx">
 <span class="hljs-keyword">import</span> {Atom, swap} <span class="hljs-keyword">from</span> <span class="hljs-string">'@libre/atom'</span>
+<span class="hljs-keyword">import</span> {prettyPrint} <span class="hljs-keyword">from</span> <span class="hljs-string">'./prettyPrint'</span>
 
 <span class="hljs-keyword">const</span> stateAtom = Atom.of({ <span class="hljs-attr">count</span>: <span class="hljs-number">0</span> })
 <span class="hljs-keyword">const</span> increment = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> swap(stateAtom, (state) =&gt; ({
