@@ -4,7 +4,7 @@ import { AtomConstructorOptions, DeepImmutable } from "./internal-types";
 let nextAtomUid = 0;
 const stateByAtomId: Record<number, DeepImmutable<any>> = Object.create(null);
 const validatorByAtomId: Record<number, NonNullable<AtomConstructorOptions<any>["validator"]>> = Object.create(null);
-const changeHandlersByAtomId: Record<number, Record<string, (s: any) => void>> = {};
+const changeHandlersByAtomId: Record<number, Record<string | symbol, (s: any) => void>> = {};
 
 /** @ignore */
 export function _useNextAtomId() {
@@ -38,24 +38,29 @@ export function _initChangeHandlerDict(atom: Atom<any>) {
 /** @ignore */
 export function _addChangeHandler<S>(
   atom: Atom<S>,
-  key: string,
+  key: string | symbol,
   handler: (states: { previous: S; current: S }) => void
 ) {
   if (typeof changeHandlersByAtomId[atom["$$id"]][key] === "function") {
     throw new Error(
-      `Change handler already registered for key "${key}" on ${atom}.\nRemove the existing handler before registering a new one.`
+      `Change handler already registered for key "${String(key)}" on ${atom}.\nRemove the existing handler before registering a new one.`
     );
   }
   changeHandlersByAtomId[atom["$$id"]][key] = handler;
 }
 
 /** @ignore */
-export function _removeChangeHandler<S>(atom: Atom<S>, key: string) {
+export function _removeChangeHandler<S>(atom: Atom<S>, key: string | symbol) {
   delete changeHandlersByAtomId[atom["$$id"]][key];
 }
 
 /** @ignore */
 export function _runChangeHandlers<S>(atom: Atom<S>, previous: S, current: S) {
+  Object.getOwnPropertySymbols(changeHandlersByAtomId[atom["$$id"]]).forEach(k => {
+    if (typeof changeHandlersByAtomId[atom["$$id"]][k] === "function") {
+      changeHandlersByAtomId[atom["$$id"]][k]({ previous, current });
+    }
+  });
   Object.keys(changeHandlersByAtomId[atom["$$id"]]).forEach(k => {
     if (typeof changeHandlersByAtomId[atom["$$id"]][k] === "function") {
       changeHandlersByAtomId[atom["$$id"]][k]({ previous, current });

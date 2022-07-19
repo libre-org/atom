@@ -28,7 +28,7 @@ swap(countAtom, (state) => ({ count: state.count + 1 }))
  */
 export function addChangeHandler<S>(
   atom: Atom<S>,
-  key: string,
+  key: string | symbol,
   handler: (states: { previous: S; current: S }) => void
 ) {
   _addChangeHandler(atom, key, handler);
@@ -62,6 +62,6 @@ swap(countAtom, (state) => ({ count: state.count + 1 }))
 // nothing is logged
 ```
  */
-export function removeChangeHandler<S>(atom: Atom<S>, key: string) {
+export function removeChangeHandler<S>(atom: Atom<S>, key: string | symbol) {
   _removeChangeHandler(atom, key);
 }

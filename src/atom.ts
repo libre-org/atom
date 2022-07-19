@@ -31,6 +31,7 @@ const a3 = Atom.of({ count: 0 })
   }
 
   /** @ignore */
+  // @ts-ignore
   public readonly ["$$id"]: number;
 
   /** @ignore */
